@@ -5,8 +5,6 @@ int myAdd(int x, int y){
 };
 
 int main(int argc, char* argv[]){
-    printf("Hello, World!\n");
-
     int x, y;
 
     printf("Please give me a number x: ");
