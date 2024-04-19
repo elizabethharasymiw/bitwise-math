@@ -1,7 +1,17 @@
 #include <stdio.h>
 
 int myAdd(int x, int y){
-    return x + y;
+
+    int carry = x & y;
+    int result = x ^ y;
+
+    while(carry != 0){
+        int shiftedCarry = carry << 1;
+        carry = result & shiftedCarry;
+        result ^= shiftedCarry;
+    }
+
+    return result;
 };
 
 int main(int argc, char* argv[]){
