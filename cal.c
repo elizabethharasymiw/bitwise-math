@@ -14,6 +14,13 @@ int myAdd(int x, int y){
     return result;
 };
 
+int mySub(int x, int y){
+
+    int negativeY = myAdd(~(y), 1);
+
+    return myAdd(x, negativeY);
+}
+
 int main(int argc, char* argv[]){
     int x, y;
 
@@ -24,8 +31,10 @@ int main(int argc, char* argv[]){
     scanf("%d", &y);
 
     int z = myAdd(x, y);
-
     printf("x + y = %d\n", z);
+
+    int z2 = mySub(x, y);
+    printf("x - y = %d\n", z2);
 
     return 0;
 }
