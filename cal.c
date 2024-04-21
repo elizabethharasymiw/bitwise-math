@@ -39,6 +39,37 @@ int myMul(int x, int y){
     return sum;
 }
 
+int myDiv(int x, int y){
+    int divCount = 0;
+    int negativeCount = 0;
+    int MAX_INT = 2147483647;
+
+    if(y == 0){
+        return MAX_INT;
+    }
+
+    if(y < 0){
+        negativeCount++;
+        y = ~(y) + 1;
+    }
+
+    if(x < 0){
+        negativeCount++;
+        x = ~(x) + 1;
+    }
+
+    while(x >= y){
+        x = mySub(x, y);
+        divCount++;
+    }
+
+    if(negativeCount == 1){
+        divCount = ~(divCount) + 1;
+    }
+
+    return divCount;
+}
+
 int main(int argc, char* argv[]){
     int x, y;
 
@@ -56,6 +87,9 @@ int main(int argc, char* argv[]){
 
     int z3 = myMul(x, y);
     printf("x * y = %d\n", z3);
+
+    int z4 = myDiv(x, y);
+    printf("x / y = %d\n", z4);
 
     return 0;
 }
