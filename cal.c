@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+int MAX_INT = 2147483647;
+
 int myAdd(int x, int y){
 
     int carry = x & y;
@@ -42,7 +44,6 @@ int myMul(int x, int y){
 int myDiv(int x, int y){
     int divCount = 0;
     int negativeCount = 0;
-    int MAX_INT = 2147483647;
 
     if(y == 0){
         return MAX_INT;
@@ -70,6 +71,26 @@ int myDiv(int x, int y){
     return divCount;
 }
 
+int myMod(int x, int y){
+    if(y == 0){
+        return MAX_INT;
+    }
+
+    if(y < 0){
+        y = ~(y) + 1;
+    }
+
+    if(x < 0){
+        x = ~(x) + 1;
+    }
+
+    while(x >= y){
+        x = mySub(x, y);
+    }
+
+    return x;
+}
+
 int main(int argc, char* argv[]){
     int x, y;
 
@@ -90,6 +111,9 @@ int main(int argc, char* argv[]){
 
     int z4 = myDiv(x, y);
     printf("x / y = %d\n", z4);
+
+    int z5 = myMod(x, y);
+    printf("x %% y = %d\n", z5);
 
     return 0;
 }
