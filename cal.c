@@ -2,6 +2,40 @@
 
 int MAX_INT = 2147483647;
 
+int myAdd(int x, int y);
+int mySub(int x, int y);
+int myMul(int x, int y);
+int myDiv(int x, int y);
+int myMod(int x, int y);
+void reverseSign(int* x);
+
+int main(int argc, char* argv[]){
+    int x, y;
+
+    printf("Please give me a number x: ");
+    scanf("%d", &x);
+
+    printf("Please give me a number y: ");
+    scanf("%d", &y);
+
+    int z = myAdd(x, y);
+    printf("x + y = %d\n", z);
+
+    int z2 = mySub(x, y);
+    printf("x - y = %d\n", z2);
+
+    int z3 = myMul(x, y);
+    printf("x * y = %d\n", z3);
+
+    int z4 = myDiv(x, y);
+    printf("x / y = %d\n", z4);
+
+    int z5 = myMod(x, y);
+    printf("x %% y = %d\n", z5);
+
+    return 0;
+}
+
 int myAdd(int x, int y){
 
     int carry = x & y;
@@ -91,29 +125,8 @@ int myMod(int x, int y){
     return x;
 }
 
-int main(int argc, char* argv[]){
-    int x, y;
-
-    printf("Please give me a number x: ");
-    scanf("%d", &x);
-
-    printf("Please give me a number y: ");
-    scanf("%d", &y);
-
-    int z = myAdd(x, y);
-    printf("x + y = %d\n", z);
-
-    int z2 = mySub(x, y);
-    printf("x - y = %d\n", z2);
-
-    int z3 = myMul(x, y);
-    printf("x * y = %d\n", z3);
-
-    int z4 = myDiv(x, y);
-    printf("x / y = %d\n", z4);
-
-    int z5 = myMod(x, y);
-    printf("x %% y = %d\n", z5);
-
-    return 0;
+void reverseSign(int* x){
+    *x = myAdd(~(*x), 1);
 }
+
+
