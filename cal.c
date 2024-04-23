@@ -51,10 +51,8 @@ int myAdd(int x, int y){
 };
 
 int mySub(int x, int y){
-
-    int negativeY = myAdd(~(y), 1);
-
-    return myAdd(x, negativeY);
+    reverseSign(&y);
+    return myAdd(x, y);
 }
 
 int myMul(int x, int y){
@@ -65,11 +63,11 @@ int myMul(int x, int y){
             sum = myAdd(sum, x);
         }
     }else{
-        y = myAdd(~(y), 1);
+        reverseSign(&y);
         for(int i = 0; i < y; i++){
             sum = myAdd(sum, x);
         }
-        sum = myAdd(~(sum), 1);
+        reverseSign(&sum);
     }
 
     return sum;
@@ -85,12 +83,12 @@ int myDiv(int x, int y){
 
     if(y < 0){
         negativeCount++;
-        y = ~(y) + 1;
+        reverseSign(&y);
     }
 
     if(x < 0){
         negativeCount++;
-        x = ~(x) + 1;
+        reverseSign(&x);
     }
 
     while(x >= y){
@@ -99,7 +97,7 @@ int myDiv(int x, int y){
     }
 
     if(negativeCount == 1){
-        divCount = ~(divCount) + 1;
+        reverseSign(&divCount);
     }
 
     return divCount;
@@ -111,11 +109,11 @@ int myMod(int x, int y){
     }
 
     if(y < 0){
-        y = ~(y) + 1;
+        reverseSign(&y);
     }
 
     if(x < 0){
-        x = ~(x) + 1;
+        reverseSign(&x);
     }
 
     while(x >= y){
