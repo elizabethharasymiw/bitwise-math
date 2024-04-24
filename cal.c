@@ -12,11 +12,32 @@ void reverseSign(int* x);
 int main(int argc, char* argv[]){
     int x, y;
 
-    printf("Please give me a number x: ");
-    scanf("%d", &x);
+    for(int validInput = 0; !validInput; /* check ifs */){
+        printf("Please give me a number x: ");
+        if(scanf("%9d", &x) == 1){
+           validInput = 1;
+        }
+        else{
+            // Clear input buffer
+            while ((getchar()) != '\n');
+            printf("Invalid input. Please enter an integer.\n");
+        }
+    }
 
-    printf("Please give me a number y: ");
-    scanf("%d", &y);
+    for(int validInput = 0; !validInput; /* check ifs */){
+        printf("Please give me a number y: ");
+        if(scanf("%9d", &y) == 1){
+           validInput = 1;
+        }
+        else{
+            // Clear input buffer
+            while ((getchar()) != '\n');
+            printf("Invalid input. Please enter an integer.\n");
+        }
+    }
+
+    printf("x = %d\n", x);
+    printf("y = %d\n", y);
 
     int z = myAdd(x, y);
     printf("x + y = %d\n", z);
@@ -60,12 +81,20 @@ int myMul(int x, int y){
 
     if (y > 0){
         for(int i = 0; i < y; i++){
+            int overflowCheck = sum;
             sum = myAdd(sum, x);
+            if (overflowCheck > sum){
+                return MAX_INT;
+            }
         }
     }else{
         reverseSign(&y);
         for(int i = 0; i < y; i++){
+            int overflowCheck = sum;
             sum = myAdd(sum, x);
+            if (overflowCheck > sum){
+                return - MAX_INT;
+            }
         }
         reverseSign(&sum);
     }
