@@ -66,12 +66,20 @@ int myMul(int x, int y){
 
     if (y > 0){
         for(int i = 0; i < y; i++){
+            int overflowCheck = sum;
             sum = myAdd(sum, x);
+            if (overflowCheck > sum){
+                return MAX_INT;
+            }
         }
     }else{
         reverseSign(&y);
         for(int i = 0; i < y; i++){
+            int overflowCheck = sum;
             sum = myAdd(sum, x);
+            if (overflowCheck > sum){
+                return - MAX_INT;
+            }
         }
         reverseSign(&sum);
     }
