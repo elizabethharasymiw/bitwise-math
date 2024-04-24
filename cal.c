@@ -15,6 +15,9 @@ int main(int argc, char* argv[]){
     printf("Please give me a number x: ");
     scanf("%d", &x);
 
+    // Clear input buffer
+    while ((getchar()) != '\n');
+
     printf("Please give me a number y: ");
     scanf("%d", &y);
 
