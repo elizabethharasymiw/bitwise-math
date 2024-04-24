@@ -12,14 +12,29 @@ void reverseSign(int* x);
 int main(int argc, char* argv[]){
     int x, y;
 
-    printf("Please give me a number x: ");
-    scanf("%9d", &x);
+    for(int validInput = 0; !validInput; /* check ifs */){
+        printf("Please give me a number x: ");
+        if(scanf("%9d", &x) == 1){
+           validInput = 1;
+        }
+        else{
+            // Clear input buffer
+            while ((getchar()) != '\n');
+            printf("Invalid input. Please enter an integer.\n");
+        }
+    }
 
-    // Clear input buffer
-    while ((getchar()) != '\n');
-
-    printf("Please give me a number y: ");
-    scanf("%9d", &y);
+    for(int validInput = 0; !validInput; /* check ifs */){
+        printf("Please give me a number y: ");
+        if(scanf("%9d", &y) == 1){
+           validInput = 1;
+        }
+        else{
+            // Clear input buffer
+            while ((getchar()) != '\n');
+            printf("Invalid input. Please enter an integer.\n");
+        }
+    }
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
