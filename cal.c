@@ -18,6 +18,9 @@ int main(int argc, char* argv[]){
     printf("Please give me a number y: ");
     scanf("%d", &y);
 
+    printf("x = %d\n", x);
+    printf("y = %d\n", y);
+
     int z = myAdd(x, y);
     printf("x + y = %d\n", z);
 
