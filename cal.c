@@ -13,13 +13,13 @@ int main(int argc, char* argv[]){
     int x, y;
 
     printf("Please give me a number x: ");
-    scanf("%d", &x);
+    scanf("%9d", &x);
 
     // Clear input buffer
     while ((getchar()) != '\n');
 
     printf("Please give me a number y: ");
-    scanf("%d", &y);
+    scanf("%9d", &y);
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
