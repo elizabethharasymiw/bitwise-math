@@ -8,6 +8,7 @@ int myMul(int x, int y);
 int myDiv(int x, int y);
 int myMod(int x, int y);
 void reverseSign(int* x);
+void clearInputBuffer();
 
 int main(int argc, char* argv[]){
     int x, y;
@@ -18,8 +19,7 @@ int main(int argc, char* argv[]){
            validInput = 1;
         }
         else{
-            // Clear input buffer
-            while ((getchar()) != '\n');
+            clearInputBuffer();
             printf("Invalid input. Please enter an integer.\n");
         }
     }
@@ -30,8 +30,7 @@ int main(int argc, char* argv[]){
            validInput = 1;
         }
         else{
-            // Clear input buffer
-            while ((getchar()) != '\n');
+            clearInputBuffer();
             printf("Invalid input. Please enter an integer.\n");
         }
     }
@@ -156,4 +155,10 @@ void reverseSign(int* x){
     *x = myAdd(~(*x), 1);
 }
 
+void clearInputBuffer(){
+    char check;
+    while(check != '\n'){
+        check = getchar();
+    }
+}
 
