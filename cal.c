@@ -9,31 +9,13 @@ int myDiv(int x, int y);
 int myMod(int x, int y);
 void reverseSign(int* x);
 void clearInputBuffer();
+void getIntFromUser(int* num, char* name);
 
 int main(int argc, char* argv[]){
     int x, y;
 
-    for(int validInput = 0; !validInput; /* check ifs */){
-        printf("Please give me a number x: ");
-        if(scanf("%9d", &x) == 1){
-           validInput = 1;
-        }
-        else{
-            clearInputBuffer();
-            printf("Invalid input. Please enter an integer.\n");
-        }
-    }
-
-    for(int validInput = 0; !validInput; /* check ifs */){
-        printf("Please give me a number y: ");
-        if(scanf("%9d", &y) == 1){
-           validInput = 1;
-        }
-        else{
-            clearInputBuffer();
-            printf("Invalid input. Please enter an integer.\n");
-        }
-    }
+    getIntFromUser(&x, "x");
+    getIntFromUser(&y, "y");
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
@@ -162,3 +144,16 @@ void clearInputBuffer(){
     }
 }
 
+void getIntFromUser(int* num, char* name){
+    int validInput = 0;
+    while(!validInput){
+        printf("Please give me a number %s: ", name);
+        if(scanf("%9d", num) == 1){
+           validInput = 1;
+        }
+        else{
+            clearInputBuffer();
+            printf("Invalid input. Please enter an integer.\n");
+        }
+    }
+}
