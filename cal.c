@@ -20,20 +20,11 @@ int main(int argc, char* argv[]){
     printf("x = %d\n", x);
     printf("y = %d\n", y);
 
-    int z = myAdd(x, y);
-    printf("x + y = %d\n", z);
-
-    int z2 = mySub(x, y);
-    printf("x - y = %d\n", z2);
-
-    int z3 = myMul(x, y);
-    printf("x * y = %d\n", z3);
-
-    int z4 = myDiv(x, y);
-    printf("x / y = %d\n", z4);
-
-    int z5 = myMod(x, y);
-    printf("x %% y = %d\n", z5);
+    printf("x + y = %d\n", myAdd(x, y));
+    printf("x - y = %d\n", mySub(x, y));
+    printf("x * y = %d\n", myMul(x, y));
+    printf("x / y = %d\n", myDiv(x, y));
+    printf("x %% y = %d\n", myMod(x, y));
 
     return 0;
 }
