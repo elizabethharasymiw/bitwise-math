@@ -8,51 +8,23 @@ int myMul(int x, int y);
 int myDiv(int x, int y);
 int myMod(int x, int y);
 void reverseSign(int* x);
+void clearInputBuffer();
+void getIntFromUser(int* num, char* name);
 
 int main(int argc, char* argv[]){
     int x, y;
 
-    for(int validInput = 0; !validInput; /* check ifs */){
-        printf("Please give me a number x: ");
-        if(scanf("%9d", &x) == 1){
-           validInput = 1;
-        }
-        else{
-            // Clear input buffer
-            while ((getchar()) != '\n');
-            printf("Invalid input. Please enter an integer.\n");
-        }
-    }
-
-    for(int validInput = 0; !validInput; /* check ifs */){
-        printf("Please give me a number y: ");
-        if(scanf("%9d", &y) == 1){
-           validInput = 1;
-        }
-        else{
-            // Clear input buffer
-            while ((getchar()) != '\n');
-            printf("Invalid input. Please enter an integer.\n");
-        }
-    }
+    getIntFromUser(&x, "x");
+    getIntFromUser(&y, "y");
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
 
-    int z = myAdd(x, y);
-    printf("x + y = %d\n", z);
-
-    int z2 = mySub(x, y);
-    printf("x - y = %d\n", z2);
-
-    int z3 = myMul(x, y);
-    printf("x * y = %d\n", z3);
-
-    int z4 = myDiv(x, y);
-    printf("x / y = %d\n", z4);
-
-    int z5 = myMod(x, y);
-    printf("x %% y = %d\n", z5);
+    printf("x + y = %d\n", myAdd(x, y));
+    printf("x - y = %d\n", mySub(x, y));
+    printf("x * y = %d\n", myMul(x, y));
+    printf("x / y = %d\n", myDiv(x, y));
+    printf("x %% y = %d\n", myMod(x, y));
 
     return 0;
 }
@@ -156,4 +128,23 @@ void reverseSign(int* x){
     *x = myAdd(~(*x), 1);
 }
 
+void clearInputBuffer(){
+    char check;
+    while(check != '\n'){
+        check = getchar();
+    }
+}
 
+void getIntFromUser(int* num, char* name){
+    int validInput = 0;
+    while(!validInput){
+        printf("Please give me a number %s: ", name);
+        if(scanf("%9d", num) == 1){
+           validInput = 1;
+        }
+        else{
+            clearInputBuffer();
+            printf("Invalid input. Please enter an integer.\n");
+        }
+    }
+}
