@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <pthread.h>
 
 int MAX_INT = 2147483647;
 
@@ -10,12 +11,22 @@ int myMod(int x, int y);
 void reverseSign(int* x);
 void clearInputBuffer();
 void getIntFromUser(int* num, char* name);
+void* divThread(void* vargp);
+void* modThread(void* vargp);
 
 int main(int argc, char* argv[]){
     int x, y;
+    int divResult;
+    int modResult;
 
     getIntFromUser(&x, "x");
     getIntFromUser(&y, "y");
+
+    pthread_t div_thread_id;
+    pthread_t mod_thread_id;
+
+    pthread_create(&div_thread_id, NULL, divThread, (void*) &div_thread_id);
+    pthread_create(&mod_thread_id, NULL, divThread, (void*) &mod_thread_id);
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
@@ -23,8 +34,10 @@ int main(int argc, char* argv[]){
     printf("x + y = %d\n", myAdd(x, y));
     printf("x - y = %d\n", mySub(x, y));
     printf("x * y = %d\n", myMul(x, y));
-    printf("x / y = %d\n", myDiv(x, y));
-    printf("x %% y = %d\n", myMod(x, y));
+    pthread_join(div_thread_id, divResult);
+    printf("x / y = %d\n", divResult);
+    pthread_join(mod_thread_id, modResult);
+    printf("x %% y = %d\n", modResult);
 
     return 0;
 }
@@ -148,3 +161,18 @@ void getIntFromUser(int* num, char* name){
         }
     }
 }
+
+void* divThread(void* vargp){
+    int (*func)(int, int) = (int (*)(int, int))vargp;
+    int result = myDiv(10, 20);
+    pthread_exit((void *)result);
+}
+
+void* modThread(void* vargp){
+    int (*func)(int, int) = (int (*)(int, int))vargp;
+    int result = myMod(10, 20);
+    pthread_exit((void *)result);
+
+}
+
+
