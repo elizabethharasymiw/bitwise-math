@@ -32,15 +32,15 @@ int main(int argc, char* argv[]){
     getIntFromUser(&y, "y");
 
     threadArgsDiv.x = x;
-    threadArgsDiv.x = x;
-    threadArgsMod.y = y;
+    threadArgsDiv.y = y;
+    threadArgsMod.x = x;
     threadArgsMod.y = y;
 
     pthread_t div_thread_id;
     pthread_t mod_thread_id;
 
     pthread_create(&div_thread_id, NULL, divThread, (void*) &threadArgsDiv);
-    pthread_create(&mod_thread_id, NULL, divThread, (void*) &threadArgsMod);
+    pthread_create(&mod_thread_id, NULL, modThread, (void*) &threadArgsMod);
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
