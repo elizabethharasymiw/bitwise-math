@@ -3,6 +3,11 @@
 
 int MAX_INT = 2147483647;
 
+typedef struct{
+    int x;
+    int y;
+} ThreadArgs;
+
 int myAdd(int x, int y);
 int mySub(int x, int y);
 int myMul(int x, int y);
@@ -11,22 +16,26 @@ int myMod(int x, int y);
 void reverseSign(int* x);
 void clearInputBuffer();
 void getIntFromUser(int* num, char* name);
-void* divThread(void* vargp);
-void* modThread(void* vargp);
+void* divThread(void* args);
+void* modThread(void* args);
 
 int main(int argc, char* argv[]){
     int x, y;
     int divResult;
     int modResult;
+    ThreadArgs threadArgs;
 
     getIntFromUser(&x, "x");
     getIntFromUser(&y, "y");
 
+    threadArgs.x = x;
+    threadArgs.y = y;
+
     pthread_t div_thread_id;
     pthread_t mod_thread_id;
 
-    pthread_create(&div_thread_id, NULL, divThread, (void*) &div_thread_id);
-    pthread_create(&mod_thread_id, NULL, divThread, (void*) &mod_thread_id);
+    pthread_create(&div_thread_id, NULL, divThread, (void*) &threadArgs);
+    pthread_create(&mod_thread_id, NULL, divThread, (void*) &threadArgs);
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
@@ -162,17 +171,15 @@ void getIntFromUser(int* num, char* name){
     }
 }
 
-void* divThread(void* vargp){
-    int (*func)(int, int) = (int (*)(int, int))vargp;
-    int result = myDiv(10, 20);
+void* divThread(void* args){
+    ThreadArgs *myargs = (ThreadArgs *) args;
+    int result = myDiv(myargs->x, myargs->y);
     pthread_exit((void *)result);
 }
 
-void* modThread(void* vargp){
-    int (*func)(int, int) = (int (*)(int, int))vargp;
-    int result = myMod(10, 20);
+void* modThread(void* args){
+    ThreadArgs *myargs = (ThreadArgs *) args;
+    int result = myMod(myargs->x, myargs->y);
     pthread_exit((void *)result);
 
 }
-
-
