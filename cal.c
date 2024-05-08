@@ -1,6 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
 
 int MAX_INT = 2147483647;
+
+typedef struct{
+    int x;
+    int y;
+    int result;
+} ThreadArgs;
 
 int myAdd(int x, int y);
 int mySub(int x, int y);
@@ -10,12 +18,29 @@ int myMod(int x, int y);
 void reverseSign(int* x);
 void clearInputBuffer();
 void getIntFromUser(int* num, char* name);
+void* divThread(void* args);
+void* modThread(void* args);
 
 int main(int argc, char* argv[]){
     int x, y;
+    int divResult;
+    int modResult;
+    ThreadArgs threadArgsDiv, threadArgsMod;
+    int *result_div, *result_mod;
 
     getIntFromUser(&x, "x");
     getIntFromUser(&y, "y");
+
+    threadArgsDiv.x = x;
+    threadArgsDiv.y = y;
+    threadArgsMod.x = x;
+    threadArgsMod.y = y;
+
+    pthread_t div_thread_id;
+    pthread_t mod_thread_id;
+
+    pthread_create(&div_thread_id, NULL, divThread, (void*) &threadArgsDiv);
+    pthread_create(&mod_thread_id, NULL, modThread, (void*) &threadArgsMod);
 
     printf("x = %d\n", x);
     printf("y = %d\n", y);
@@ -23,8 +48,10 @@ int main(int argc, char* argv[]){
     printf("x + y = %d\n", myAdd(x, y));
     printf("x - y = %d\n", mySub(x, y));
     printf("x * y = %d\n", myMul(x, y));
-    printf("x / y = %d\n", myDiv(x, y));
-    printf("x %% y = %d\n", myMod(x, y));
+    pthread_join(div_thread_id, (void **)&result_div);
+    printf("x / y = %d\n", *result_div);
+    pthread_join(mod_thread_id, (void **)&result_mod);
+    printf("x %% y = %d\n", *result_mod);
 
     return 0;
 }
@@ -147,4 +174,24 @@ void getIntFromUser(int* num, char* name){
             printf("Invalid input. Please enter an integer.\n");
         }
     }
+}
+
+void* divThread(void* args){
+    ThreadArgs *myargs = (ThreadArgs *) args;
+    myargs->result = myDiv(myargs->x, myargs->y);
+
+    int *result_ptr = malloc(sizeof(int));
+    *result_ptr = myargs->result;
+
+    pthread_exit(result_ptr);
+}
+
+void* modThread(void* args){
+    ThreadArgs *myargs = (ThreadArgs *) args;
+    myargs->result = myMod(myargs->x, myargs->y);
+
+    int *result_ptr = malloc(sizeof(int));
+    *result_ptr = myargs->result;
+
+    pthread_exit(result_ptr);
 }
