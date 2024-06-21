@@ -5,6 +5,7 @@ Math functions written without arithmetic operators in C
 
 ## C bitwise examples
 ```
+int x = 4;    // initialize x
 x |= 1;       // Set the 0th bit
 x |= 1 << 4;  // Set the 4th bit
 x ^= 1 << 4;  // Flip the 4th bit
