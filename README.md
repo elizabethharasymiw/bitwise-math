@@ -1,5 +1,5 @@
 # Bitwise Math
-Calculator program written without arithmetic operators in C
+Command line calculator program written without arithmetic operators in C
 
 ## How to Use
 - Note: This project does not have any shipped releases yet
