@@ -6,7 +6,6 @@ Math functions written without arithmetic operators in C
 
 ## Developer Build Instructions
 - Note: Build System requires GNU Make
-- Install Make
 - Normal build: ``` make ```
 - Manual Test: ``` make run ```
 - Clean Environment: ``` make clean ```
