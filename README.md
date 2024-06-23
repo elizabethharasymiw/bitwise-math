@@ -1,11 +1,16 @@
 # Bitwise Math
-Math functions written without arithmetic operators in C
+Calculator program written without arithmetic operators in C
 
 ## How to Use
-- insert user directions here
+- Note: This project does not have any shipped releases yet
+- Note: No support on Windows
+- Use GNU Make to build: ``` make ```
+- Start Program: ``` make run ```
+- The program takes in two numbers and runs multiple arithmetic operations
 
 ## Developer Build Instructions
 - Note: Build System requires GNU Make
+- Note: No support on Windows
 - Normal build: ``` make ```
 - Manual Test: ``` make run ```
 - Clean Environment: ``` make clean ```
