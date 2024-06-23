@@ -1,5 +1,15 @@
-# bitwise-math
+# Bitwise Math
 Math functions written without arithmetic operators in C
+
+## How to Use
+- insert user directions here
+
+## Developer Build Instructions
+- Note: Build System requires GNU Make
+- Install Make
+- Normal build: ``` make ```
+- Manual Test: ``` make run ```
+- Clean Environment: ``` make clean ```
 
 # Bitwise Cheat sheet
 
